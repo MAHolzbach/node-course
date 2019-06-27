@@ -1,0 +1,23 @@
+{
+  "name": "node-course",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "test",
+    "start": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MAHolzbach/node-course.git"
+  },
+  "author": "Mike Holzbach",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MAHolzbach/node-course/issues"
+  },
+  "homepage": "https://github.com/MAHolzbach/node-course#readme",
+  "devDependencies": {
+    "nodemon": "^1.19.1"
+  }
+}

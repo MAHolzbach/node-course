@@ -8,9 +8,11 @@ const requestHandler = (req, res) => {
     );
     return res.end();
   }
+
   if (url === "/users") {
     res.write("<html><ul><li>User 1</li><li>User 2</li></ul></html>");
   }
+
   if (url === "/create-user" && method === "POST") {
     const body = [];
     req.on("data", chunk => {
