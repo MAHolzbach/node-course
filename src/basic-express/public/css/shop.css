@@ -1,0 +1,11 @@
+.card {
+  height: 100%;
+}
+.products {
+  display: flex;
+  justify-content: space-around;
+}
+.card {
+  margin: 0 24px;
+  width: 300px;
+}
