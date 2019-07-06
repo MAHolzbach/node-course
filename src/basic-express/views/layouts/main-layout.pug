@@ -1,0 +1,40 @@
+doctype html
+html(lang='en')
+  head
+    meta(charset='UTF-8')
+    meta(name='viewport', content='width=device-width, initial-scale=1.0')
+    meta(http-equiv='X-UA-Compatible', content='ie=edge')
+    title #{docTitle}
+    link(rel='stylesheet', href='/css/main.css')
+    script.
+      document.addEventListener("DOMContentLoaded", () => {
+        const $navbarBurgers = Array.prototype.slice.call(
+          document.querySelectorAll(".navbar-burger"),
+          0
+        );
+
+        if ($navbarBurgers.length > 0) {
+          $navbarBurgers.forEach(el => {
+            el.addEventListener("click", () => {
+              const target = el.dataset.target;
+              const $target = document.getElementById(target);
+              el.classList.toggle("is-active");
+              $target.classList.toggle("is-active");
+            });
+          });
+        }
+      });
+    block styles
+  body
+    header
+      nav(role='navigation', aria-label='main navigation')
+        .navbar-brand.navbar.is-dark
+          a.navbar-burger.burger(role='button', aria-label='menu', aria-expanded='false', data-target='navbar-menu')
+            span(aria-hidden='true')
+            span(aria-hidden='true')
+            span(aria-hidden='true')
+        #navbar-menu.navbar-menu
+          .navbar-start
+            a.navbar-item(href='/', class=(path === '/' ? 'has-background-grey-lighter' : '')) Shop
+            a.navbar-item(href='/admin/add-product', class=(path === '/admin/add-product' ? 'has-background-grey-lighter' : '')) Add Product
+    block content

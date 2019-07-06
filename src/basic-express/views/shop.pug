@@ -1,56 +1,22 @@
-<!DOCTYPE html>
-html(lang="en")
-  head
-    meta(charset="UTF-8")
-    meta(name="viewport", content="width=device-width, initial-scale=1.0")
-    meta(http-equiv="X-UA-Compatible", content="ie=edge")
-    title #{docTitle}
-    link(rel="stylesheet", href="/css/main.css")
-    link(rel="stylesheet", href="/css/shop.css")
-    script.
-      document.addEventListener("DOMContentLoaded", () => {
-        const $navbarBurgers = Array.prototype.slice.call(
-          document.querySelectorAll(".navbar-burger"),
-          0
-        );
+extends layouts/main-layout.pug
 
-        if ($navbarBurgers.length > 0) {
-          $navbarBurgers.forEach(el => {
-            el.addEventListener("click", () => {
-              const target = el.dataset.target;
-              const $target = document.getElementById(target);
+block styles
+  link(rel="stylesheet", href="/css/shop.css")
 
-              el.classList.toggle("is-active");
-              $target.classList.toggle("is-active");
-            });
-          });
-        }
-      });
+block content
+  section.shop
+    h1 My Products
+    if products.length > 0
+      div.products
+        each product in products
+          div.card
+            div.card-image
+              figure.image.is-4by3 
+                img(src="https://cdn.pixabay.com/photo/2016/03/31/20/51/book-1296045_960_720.png", alt="Book image")
+            div.card-content
+              p.title.is-4 #{product.title}
+            div.card-footer
+              a.card-footer-item.button.is-primary Add To Cart
+    else
+      h1 No Products
 
-  body
-    header
-      nav.navbar(role='navigation', aria-label='main navigation')
-        .navbar-brand
-          a.navbar-burger.burger(role='button', aria-label='menu', aria-expanded='false', data-target='navbar-menu')
-            span(aria-hidden='true')
-            span(aria-hidden='true')
-            span(aria-hidden='true')
-        #navbar-menu.navbar-menu
-          .navbar-start
-            a.navbar-item(href='/') Shop
-            a.navbar-item(href='/admin/add-product') Add Product
-    section.shop
-      h1 My Products
-      if products.length > 0
-        div.products
-          each product in products
-            div.card
-              div.card-image
-                figure.image.is-4by3 
-                  img(src="https://cdn.pixabay.com/photo/2016/03/31/20/51/book-1296045_960_720.png", alt="Book image")
-              div.card-content
-                p.title.is-4 #{product.title}
-              div.card-footer
-                a.card-footer-item.button.is-primary Add To Cart
-      else
-        h1 No Products
