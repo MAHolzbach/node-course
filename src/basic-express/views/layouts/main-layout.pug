@@ -27,14 +27,13 @@ html(lang='en')
     block styles
   body
     header
-      nav(role='navigation', aria-label='main navigation')
-        .navbar-brand.navbar.is-dark
-          a.navbar-burger.burger(role='button', aria-label='menu', aria-expanded='false', data-target='navbar-menu')
-            span(aria-hidden='true')
-            span(aria-hidden='true')
-            span(aria-hidden='true')
+      nav(role='navigation', aria-label='main navigation').navbar.is-dark
+        a.navbar-burger.burger(role='button', aria-label='menu', aria-expanded='false', data-target='navbar-menu')
+          span(aria-hidden='true')
+          span(aria-hidden='true')
+          span(aria-hidden='true')
         #navbar-menu.navbar-menu
           .navbar-start
-            a.navbar-item(href='/', class=(path === '/' ? 'has-background-grey-lighter' : '')) Shop
-            a.navbar-item(href='/admin/add-product', class=(path === '/admin/add-product' ? 'has-background-grey-lighter' : '')) Add Product
+            a.navbar-item(href='/', class=(path === '/' ? 'has-background-grey-lighter has-text-dark' : '')) Shop
+            a.navbar-item(href='/admin/add-product', class=(path === '/admin/add-product' ? 'has-background-grey-lighter has-text-dark' : '')) Add Product
     block content
