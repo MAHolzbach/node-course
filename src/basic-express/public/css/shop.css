@@ -1,11 +1,14 @@
-.card {
-  height: 100%;
-}
 .products {
   display: flex;
   justify-content: space-around;
+  flex-wrap: wrap;
 }
 .card {
+  height: 100%;
   margin: 0 24px;
   width: 300px;
+}
+.form-section {
+  margin: 0 auto;
+  max-width: 500px;
 }

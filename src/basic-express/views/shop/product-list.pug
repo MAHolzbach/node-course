@@ -11,10 +11,12 @@ block content
         each product in products
           div.card
             div.card-image
-              figure.image.is-4by3 
-                img(src="https://cdn.pixabay.com/photo/2016/03/31/20/51/book-1296045_960_720.png", alt="Book image")
+              figure.image.is-2by3
+                img(src=product.imageUrl, alt="Book image")
             div.card-content
-              p.title.is-4 #{product.title}
+              p.title.is-4 Title: #{product.title}
+              p.title.is-6 Price: #{product.price}
+              p.title.is-6 Description: #{product.description}
             div.card-footer
               a.card-footer-item.button.is-primary Add To Cart
     else
