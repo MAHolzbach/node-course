@@ -30,4 +30,15 @@ module.exports = class Product {
   static fetchAll(callback) {
     getProductsFromFile(callback);
   }
+
+  delete() {
+    getProductsFromFile(products => {
+      const filterProducts = products.filter(product => {
+        product.title !== this.title;
+      });
+      fs.writeFile(p, JSON.stringify(filterProducts), err =>
+        console.error(err)
+      );
+    });
+  }
 };

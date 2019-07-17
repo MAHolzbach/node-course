@@ -1,5 +1,26 @@
 extends ../layouts/main-layout.pug
 
+block styles
+  link(rel="stylesheet", href="/css/shop.css")
+
 block content
-  section.products
-    h1 Products
+  section.shop
+    h1 My Products
+    if products.length > 0
+      div.products
+        each product in products
+          div.card
+            div.card-image
+              figure.image.is-2by3
+                img(src=product.imageUrl, alt="Book image")
+            div.card-content
+              p.title.is-4 Title: #{product.title}
+              p.title.is-6 Price: #{product.price}
+              p.title.is-6 Description: #{product.description}
+            div.card-footer
+              a(href="/admin/edit-product").card-footer-item.button.is-warning Edit
+              form(action="/admin/delete-product" method="POST")
+                button(type="submit").card-footer-item.button.is-danger Delete
+    else
+      h1 No Products
+
