@@ -5,7 +5,7 @@ block styles
 
 block content
   section.shop
-    h1 My Products
+    h1 Admin Products Control Panel
     if products.length > 0
       div.products
         each product in products
@@ -19,8 +19,7 @@ block content
               p.title.is-6 Description: #{product.description}
             div.card-footer
               a(href="/admin/edit-product").card-footer-item.button.is-warning Edit
-              form(action="/admin/delete-product" method="POST")
-                button(type="submit").card-footer-item.button.is-danger Delete
+              a(href=`/admin/delete-product/${product.id}`).card-footer-item.button.is-danger Delete
     else
       h1 No Products
 

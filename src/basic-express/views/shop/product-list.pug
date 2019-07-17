@@ -18,8 +18,9 @@ block content
               p.title.is-6 Price: #{product.price}
               p.title.is-6 Description: #{product.description}
             div.card-footer
+              a(href=`/products/${product.id}`).card-footer-item.button.is-info Details
               form(action="/add-to-cart/1")
-                button.card-footer-item.button.is-primary Add To Cart
+                a.card-footer-item.button.is-primary Add To Cart
     else
       h1 No Products
 

@@ -21,6 +21,7 @@ module.exports = class Product {
     this.price = price;
   }
   save() {
+    this.id = Math.random().toString();
     getProductsFromFile(products => {
       products.push(this);
       fs.writeFile(p, JSON.stringify(products), err => console.error(err));
@@ -31,10 +32,17 @@ module.exports = class Product {
     getProductsFromFile(callback);
   }
 
-  delete() {
+  static findById(id, callback) {
+    getProductsFromFile(products => {
+      const product = products.find(product => product.id === id);
+      callback(product);
+    });
+  }
+
+  delete(id) {
     getProductsFromFile(products => {
       const filterProducts = products.filter(product => {
-        product.title !== this.title;
+        product.id !== id;
       });
       fs.writeFile(p, JSON.stringify(filterProducts), err =>
         console.error(err)
