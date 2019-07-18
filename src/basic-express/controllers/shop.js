@@ -35,13 +35,13 @@ exports.getIndex = (req, res) => {
   });
 };
 exports.getCart = (req, res) => {
-  const cart = new Cart();
-  cart.listProducts();
   res.render("shop/cart"), { docTitle: "Your Cart", path: "/shop/cart" };
 };
 exports.postCart = (req, res) => {
   const prodId = req.body.productId;
-  console.log(prodId);
+  Product.findById(prodId, product => {
+    Cart.addProduct(prodId, product.price);
+  });
   res.redirect("/cart");
 };
 exports.getOrders = (req, res) => {
