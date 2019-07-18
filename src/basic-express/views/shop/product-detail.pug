@@ -8,5 +8,5 @@ block content
     p.is-size-2 #{product.price}
     p.is-size-3 #{product.description}
     form(action="/cart" method="POST")
-      button(type="submit").button Add to Cart
-
+      button(type="submit").button.is-success Add to Cart
+      input(type="hidden" name="productId" value=`${product.id}`)

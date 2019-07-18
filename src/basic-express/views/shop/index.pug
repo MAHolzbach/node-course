@@ -16,7 +16,9 @@ block content
             div.card-content
               p.title.is-4 #{product.title}
             div.card-footer
-              a.card-footer-item.button.is-primary Add To Cart
+              form(action="/cart" method="POST")
+                button(type="submit").button.is-success Add to Cart
+                input(type="hidden" name="productId" value=`${product.id}`)
     else
       h1 No Products
 
