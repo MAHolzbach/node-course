@@ -1,0 +1,12 @@
+extends ../layouts/main-layout.pug
+
+block content
+  section.details
+    p.is-size-1 #{product.title}
+    hr
+    img(src=`${product.imageUrl}`, alt=`${product.title}`)
+    p.is-size-2 #{product.price}
+    p.is-size-3 #{product.description}
+    form(action="/cart" method="POST")
+      button(type="submit").button Add to Cart
+
