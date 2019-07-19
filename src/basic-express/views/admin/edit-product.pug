@@ -5,7 +5,7 @@ block styles
 
 block content
   section.section.form-section
-    form(action=(editing ? '/admin/add-product' : '/admin/edit-product'), method='POST')
+    form(action= editing ? '/admin/edit-product' : '/admin/add-product', method='POST')
       label.label Product Name
       div.field
         div.control
@@ -23,4 +23,6 @@ block content
         div.control
           textarea(type='text', name='description').textarea#description #{editing ? product.description : ''}
       div.control
+        if editing
+          input(type="hidden" value=`${product.id}` name="productId")
         button(type='submit').button.is-primary #{editing ? `Update Product` : `Add Product`}
