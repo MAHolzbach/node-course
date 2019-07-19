@@ -5,22 +5,22 @@ block styles
 
 block content
   section.section.form-section
-    form(action='/admin/add-product', method='POST')
+    form(action=(editing ? '/admin/add-product' : '/admin/edit-product'), method='POST')
       label.label Product Name
       div.field
         div.control
-          input(type='text', name='title', value=(product ? `${product.title}` : '')).input#title
+          input(type='text', name='title', value=(editing ? `${product.title}` : '')).input#title
       label.label Image URL
       div.field
         div.control
-          input(type='text', name='imageUrl' value=(product ? `${product.imageUrl}` : '')).input#imageUrl
+          input(type='text', name='imageUrl' value=(editing ? `${product.imageUrl}` : '')).input#imageUrl
       label.label Price
       div.field
         div.control
-          input(type='number', name='price' step="0.01" value=(product ? `${product.price}` : '')).input#price
+          input(type='number', name='price' step="0.01" value=(editing ? `${product.price}` : '')).input#price
       label.label Description
       div.field
         div.control
-          textarea(type='text', name='description').textarea#description #{product ? product.description : ''}
+          textarea(type='text', name='description').textarea#description #{editing ? product.description : ''}
       div.control
-        button(type='submit').button.is-primary Add Product
+        button(type='submit').button.is-primary #{editing ? `Update Product` : `Add Product`}

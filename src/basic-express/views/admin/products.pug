@@ -18,7 +18,7 @@ block content
               p.title.is-6 Price: #{product.price}
               p.title.is-6 Description: #{product.description}
             div.card-footer
-              a(href=`/admin/edit-product/${product.id}`).card-footer-item.button.is-warning Edit
+              a(href=`/admin/edit-product/${product.id}?edit=true`).card-footer-item.button.is-warning Edit
               a(href=`/admin/delete-product/${product.id}`).card-footer-item.button.is-danger Delete
     else
       h1 No Products
