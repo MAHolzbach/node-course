@@ -51,12 +51,12 @@ module.exports = class Product {
     });
   }
 
-  delete(id) {
+  static delete(id) {
     getProductsFromFile(products => {
-      const filterProducts = products.filter(product => {
+      const filteredProducts = products.filter(product => {
         product.id !== id;
       });
-      fs.writeFile(p, JSON.stringify(filterProducts), err =>
+      fs.writeFile(p, JSON.stringify(filteredProducts), err =>
         console.error(err)
       );
     });
