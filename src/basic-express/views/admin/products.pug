@@ -21,7 +21,7 @@ block content
               a(href=`/admin/edit-product/${product.id}?edit=true`).card-footer-item.button.is-warning Edit
               form(action="/admin/delete-product" method="POST")
                 input(type="hidden" value=`${product.id}` name="productId")
-                a(href=`/admin/delete-product/${product.id}`).card-footer-item.button.is-danger Delete
+                button(type="submit").card-footer-item.button.is-danger Delete
     else
       h1 No Products
 
