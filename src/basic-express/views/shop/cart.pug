@@ -17,9 +17,10 @@ block content
               p.title.is-4 Title: #{product.productData.title}
               p.title.is-6 Price: #{product.productData.price}
               p.title.is-6 Description: #{product.productData.description}
+              p.title.is-6 Quantity: #{product.qty}
             div.card-footer
-              form(action="/shop/remove-product" method="POST")
-                input(type="hidden" value=`${product.id}` name="productId")
-                button(type="submit").card-footer-item.button.is-danger Remove
+              form(action="/cart-delete-item" method="POST").card-footer-item
+                input(type="hidden" value=`${product.productData.id}` name="productId")
+                button(type="submit").button.is-danger Remove
     else
       h1 Your cart is empty.
