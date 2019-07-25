@@ -1,5 +1,25 @@
 extends ../layouts/main-layout.pug
 
+block styles
+  link(rel="stylesheet", href="/css/shop.css")
+
 block content
-  section.cart
-    h1 Cart
+  section.shop
+    h1 Your Cart
+    if products.length > 0
+      div.products
+        each product in products
+          div.card
+            div.card-image
+              figure.image.is-2by3
+                img(src=product.imageUrl, alt="Book image")
+            div.card-content
+              p.title.is-4 Title: #{product.productData.title}
+              p.title.is-6 Price: #{product.productData.price}
+              p.title.is-6 Description: #{product.productData.description}
+            div.card-footer
+              form(action="/shop/remove-product" method="POST")
+                input(type="hidden" value=`${product.id}` name="productId")
+                button(type="submit").card-footer-item.button.is-danger Remove
+    else
+      h1 Your cart is empty.
