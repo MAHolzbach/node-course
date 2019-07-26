@@ -7,32 +7,38 @@ exports.getShop = (req, res) => {
   });
 };
 exports.getProducts = (req, res) => {
-  Product.fetchAll(products => {
-    res.render("shop/product-list", {
-      docTitle: "All Products",
-      products,
-      path: "/products"
-    });
-  });
+  Product.fetchAll()
+    .then(([rows]) => {
+      res.render("shop/product-list", {
+        products: rows,
+        pageTitle: "All Products",
+        path: "/products"
+      });
+    })
+    .catch(err => console.log(err));
 };
 exports.getProductDetails = (req, res) => {
   const prodId = req.params.productId;
-  Product.findById(prodId, product => {
-    res.render("shop/product-detail", {
-      docTitle: product.title,
-      path: "/products",
-      product
-    });
-  });
+  Product.findById(prodId)
+    .then(([product]) => {
+      res.render("shop/product-detail", {
+        docTitle: product.title,
+        path: "/products",
+        product: product[0]
+      });
+    })
+    .catch(err => console.log(err));
 };
 exports.getIndex = (req, res) => {
-  Product.fetchAll(products => {
-    res.render("shop/index", {
-      docTitle: "Shop",
-      products,
-      path: "/"
-    });
-  });
+  Product.fetchAll()
+    .then(([rows]) => {
+      res.render("shop/index", {
+        products: rows,
+        pageTitle: "Shop",
+        path: "/"
+      });
+    })
+    .catch(err => console.log(err));
 };
 exports.getCart = (req, res) => {
   Cart.getCart(cart => {
