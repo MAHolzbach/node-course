@@ -22,12 +22,14 @@ exports.postAddProduct = (req, res) => {
   const price = req.body.price;
   const description = req.body.description;
 
-  const product = new Product(null, title, imageUrl, price, description);
-
-  product
-    .save()
-    .then(() => res.redirect("/"))
-    .catch(err => console.log(err));
+  Product.create({
+    title,
+    imageUrl,
+    price,
+    description
+  })
+    .then(result => console.log("PRODUCT CREATED."))
+    .catch(err => console.error(err));
 };
 exports.getEditProduct = (req, res) => {
   const editMode = req.query.edit;
