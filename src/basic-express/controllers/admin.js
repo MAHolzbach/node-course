@@ -1,7 +1,8 @@
 const Product = require("../models/product");
 
 exports.getAdminProducts = (req, res) => {
-  Product.findAll()
+  req.user
+    .getProducts()
     .then(products => {
       res.render("admin/products", {
         products,
@@ -23,13 +24,13 @@ exports.postAddProduct = (req, res) => {
   const imageUrl = req.body.imageUrl;
   const price = req.body.price;
   const description = req.body.description;
-
-  Product.create({
-    title,
-    imageUrl,
-    price,
-    description
-  })
+  req.user
+    .createProduct({
+      title,
+      imageUrl,
+      price,
+      description
+    })
     .then(result => {
       console.log("PRODUCT CREATED.");
       res.redirect("/admin/products");
@@ -42,8 +43,10 @@ exports.getEditProduct = (req, res) => {
   if (!editMode) {
     return res.redirect("/");
   }
+  req.user.getProducts({ where: { id: prodId } });
   Product.findByPk(prodId)
-    .then(product => {
+    .then(products => {
+      const product = products[0];
       if (!product) {
         return res.redirect("/");
       }
