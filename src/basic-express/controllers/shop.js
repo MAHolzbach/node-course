@@ -7,7 +7,7 @@ exports.getShop = (req, res) => {
   });
 };
 exports.getProducts = (req, res) => {
-  Product.fetchAll(products => {
+  Product.fetchAll().then(products => {
     res.render("shop/product-list", {
       docTitle: "All Products",
       products,
@@ -26,7 +26,7 @@ exports.getProductDetails = (req, res) => {
   });
 };
 exports.getIndex = (req, res) => {
-  Product.fetchAll(products => {
+  Product.fetchAll().then(products => {
     res.render("shop/index", {
       docTitle: "Shop",
       products,
