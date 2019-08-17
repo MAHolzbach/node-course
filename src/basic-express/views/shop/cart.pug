@@ -20,7 +20,7 @@ block content
               p.title.is-6 Quantity: #{product.qty}
             div.card-footer
               form(action="/cart-delete-item" method="POST").card-footer-item
-                input(type="hidden" value=`${product.productData.id}` name="productId")
+                input(type="hidden" value=`${product.productData._id}` name="productId")
                 button(type="submit").button.is-danger Remove
     else
       h1 Your cart is empty.
