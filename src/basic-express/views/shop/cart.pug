@@ -10,17 +10,12 @@ block content
       div.products
         each product in products
           div.card
-            div.card-image
-              figure.image.is-2by3
-                img(src=product.imageUrl, alt="Book image")
             div.card-content
-              p.title.is-4 Title: #{product.productData.title}
-              p.title.is-6 Price: #{product.productData.price}
-              p.title.is-6 Description: #{product.productData.description}
-              p.title.is-6 Quantity: #{product.qty}
+              p.title.is-4 Title: #{product.title}
+              p.title.is-6 Quantity: #{product.quantity}
             div.card-footer
               form(action="/cart-delete-item" method="POST").card-footer-item
-                input(type="hidden" value=`${product.productData._id}` name="productId")
+                input(type="hidden" value=`${product._id}` name="productId")
                 button(type="submit").button.is-danger Remove
     else
       h1 Your cart is empty.
