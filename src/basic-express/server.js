@@ -4,8 +4,8 @@ const shopRoutes = require("./routes/shop");
 const bodyParser = require("body-parser");
 const notFoundController = require("./controllers/404");
 const path = require("path");
-const mongoConnect = require("./util/database").mongoConnect;
 const User = require("./models/user");
+const mongoose = require("mongoose");
 
 const app = express();
 
@@ -28,6 +28,11 @@ app.use("/admin", adminRoutes);
 app.use(shopRoutes);
 app.use(notFoundController.handle404);
 
-mongoConnect(() => {
-  app.listen(3000);
-});
+mongoose
+  .connect(
+    "mongodb+srv://mike:AyyptOYxjVNPnXEQ@nodecourse-7tzcj.mongodb.net/shop?retryWrites=true&w=majority"
+  )
+  .then(result => {
+    app.listen(3000);
+  })
+  .catch(err => console.log(err));
