@@ -17,5 +17,7 @@ block content
               form(action="/cart-delete-item" method="POST").card-footer-item
                 input(type="hidden" value=`${product._id}` name="productId")
                 button(type="submit").button.is-danger Remove
+      form(action="/create-order" method="POST")
+        button(type="submit").button.is-success Order Now!
     else
       h1 Your cart is empty.

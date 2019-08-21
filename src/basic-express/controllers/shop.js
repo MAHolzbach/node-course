@@ -57,20 +57,32 @@ exports.postCart = (req, res) => {
       res.redirect("/cart");
       console.log(result);
     });
-  // Product.findById(prodId, product => {
-  //   Cart.addProduct(prodId, product.price);
-  // });
-  // res.redirect("/cart");
 };
-// exports.postCartDelete = (req, res) => {
-//   const prodId = req.body.productId;
-//   Product.findById(prodId, product => {
-//     Cart.deleteProduct(prodId, product.price);
-//     res.redirect("/cart");
-//   });
-// };
+exports.postCartDelete = (req, res) => {
+  const prodId = req.body.productId;
+  req.user
+    .deleteFromCart(prodId)
+    .then(result => res.redirect("/cart"))
+    .catch(err => console.log(err));
+};
+exports.postOrder = (req, res) => {
+  req.user
+    .addOrder()
+    .then(result => res.redirect("/orders"))
+    .catch(err => console.log(err));
+};
 exports.getOrders = (req, res) => {
-  res.render("shop/orders"), { docTitle: "Your Orders", path: "/shop/orders" };
+  req.user
+    .getOrders()
+    .then(orders => {
+      console.log("ORDERS:", orders);
+      res.render("shop/orders", {
+        docTitle: "Your Orders",
+        path: "/orders",
+        orders
+      });
+    })
+    .catch(err => console.log(err));
 };
 exports.getCheckout = (req, res) => {
   res.render("shop/checkout", {
