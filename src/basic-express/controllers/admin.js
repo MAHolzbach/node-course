@@ -1,7 +1,7 @@
 const Product = require("../models/product");
 
 exports.getAdminProducts = (req, res) => {
-  Product.fetchAll().then(products => {
+  Product.find().then(products => {
     res.render("admin/products", {
       products,
       docTitle: "Admin Products",
@@ -55,24 +55,24 @@ exports.postEditProduct = (req, res) => {
   const updatedImageUrl = req.body.imageUrl;
   const updatedPrice = req.body.price;
   const updatedDescription = req.body.description;
-  const product = new Product(
-    updatedTitle,
-    updatedPrice,
-    updatedDescription,
-    updatedImageUrl,
-    prodId
-  );
-  product
-    .save()
-    .then(res => {
-      console.log("UPDATED PRODUCT!");
-      res.redirect("/admin/products");
-    })
-    .catch(err => console.log(err));
+
+  Product.findById(prodId).then(product => {
+    product.title = updatedTitle;
+    product.price = updatedPrice;
+    product.description = updatedDescription;
+    product.imageUrl = updatedImageUrl;
+    return product
+      .save()
+      .then(result => {
+        console.log("UPDATED PRODUCT!");
+        res.redirect("/admin/products");
+      })
+      .catch(err => console.log(err));
+  });
 };
 exports.postDeleteProduct = (req, res) => {
   const prodId = req.body.productId;
-  Product.deleteById(prodId).then(() => {
+  Product.findByIdAndRemove(prodId).then(() => {
     console.log("PRODUCT DESTROYED!");
     res.redirect("/admin/products");
   });
