@@ -1,13 +1,17 @@
 const Product = require("../models/product");
 
 exports.getAdminProducts = (req, res) => {
-  Product.find().then(products => {
-    res.render("admin/products", {
-      products,
-      docTitle: "Admin Products",
-      path: "admin/products"
+  Product.find()
+    // .select("title price -_id")
+    // .populate("userId", "name")
+    .then(products => {
+      console.log(products);
+      res.render("admin/products", {
+        products,
+        docTitle: "Admin Products",
+        path: "admin/products"
+      });
     });
-  });
 };
 exports.getAddProduct = (req, res, next) => {
   res.render("admin/edit-product", {
@@ -21,7 +25,13 @@ exports.postAddProduct = (req, res) => {
   const imageUrl = req.body.imageUrl;
   const price = req.body.price;
   const description = req.body.description;
-  const product = new Product({ title, price, description, imageUrl });
+  const product = new Product({
+    title,
+    price,
+    description,
+    imageUrl,
+    userId: req.user
+  });
 
   product
     .save()
