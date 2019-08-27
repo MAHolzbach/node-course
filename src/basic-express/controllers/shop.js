@@ -33,8 +33,10 @@ exports.getProductDetails = (req, res) => {
 };
 exports.getCart = (req, res) => {
   req.user
-    .getCart()
-    .then(products => {
+    .populate("cart.items.productId")
+    .execPopulate()
+    .then(user => {
+      const products = user.cart.items;
       res.render("shop/cart", {
         docTitle: "Your Cart",
         path: "/cart",
@@ -50,8 +52,8 @@ exports.postCart = (req, res) => {
       return req.user.addToCart(product);
     })
     .then(result => {
-      res.redirect("/cart");
       console.log(result);
+      res.redirect("/cart");
     });
 };
 exports.postCartDelete = (req, res) => {
