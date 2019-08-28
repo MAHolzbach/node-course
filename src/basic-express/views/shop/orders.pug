@@ -6,6 +6,6 @@ block content
     each order in orders
       div.box
         p.title.is-size-3 Order ID: #{order._id}
-        each product in order.items
-          p.title.is-size-5 #{product.title}
-          p.title.is-size-6 #{product.price}
+        each product in order.products
+          p.title.is-size-5 #{product.product.title}
+          p.title.is-size-6 #{product.quantity}
