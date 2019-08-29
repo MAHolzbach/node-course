@@ -38,6 +38,9 @@ html(lang='en')
             a.navbar-item(href='/products', class=(path === '/products' ? 'has-background-grey-lighter has-text-dark' : '')) Products
             a.navbar-item(href='/cart', class=(path === '/cart' ? 'has-background-grey-lighter has-text-dark' : '')) Cart
             a.navbar-item(href='/orders', class=(path === '/orders' ? 'has-background-grey-lighter has-text-dark' : ''))  Orders
-            a.navbar-item(href='/admin/add-product', class=(path === '/admin/add-product' ? 'has-background-grey-lighter has-text-dark' : '')) Add Product
-            a.navbar-item(href='/admin/products', class=(path === '/admin/products' ? 'has-background-grey-lighter has-text-dark' : '')) Admin Products
+            //- a.navbar-item(href='/admin/add-product', class=(path === '/admin/add-product' ? 'has-background-grey-lighter has-text-dark' : '')) Add Product
+            //- a.navbar-item(href='/admin/products', class=(path === '/admin/products' ? 'has-background-grey-lighter has-text-dark' : '')) Admin Products
+          div.navbar-end
+            a.navbar-item(href='/login', class=(path === '/login' ? 'has-background-grey-lighter has-text-dark' : ''))
+              button.button.is-dark Log In
     block content

@@ -1,6 +1,7 @@
 const express = require("express");
 const adminRoutes = require("./routes/admin");
 const shopRoutes = require("./routes/shop");
+const authRoutes = require("./routes/auth");
 const bodyParser = require("body-parser");
 const notFoundController = require("./controllers/404");
 const path = require("path");
@@ -26,6 +27,7 @@ app.use((req, res, next) => {
 
 app.use("/admin", adminRoutes);
 app.use(shopRoutes);
+app.use(authRoutes);
 app.use(notFoundController.handle404);
 
 mongoose
