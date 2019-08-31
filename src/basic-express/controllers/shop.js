@@ -6,7 +6,8 @@ exports.getIndex = (req, res) => {
     res.render("shop/index", {
       docTitle: "Shop",
       products,
-      path: "/"
+      path: "/",
+      isAuthenticated: req.isLoggedIn
     });
   });
 };
@@ -16,7 +17,8 @@ exports.getProducts = (req, res) => {
     res.render("shop/product-list", {
       docTitle: "All Products",
       products,
-      path: "/products"
+      path: "/products",
+      isAuthenticated: req.isLoggedIn
     });
   });
 };
@@ -27,7 +29,8 @@ exports.getProductDetails = (req, res) => {
       res.render("shop/product-detail", {
         docTitle: product.title,
         path: "/products",
-        product
+        product,
+        isAuthenticated: req.isLoggedIn
       });
     })
     .catch(err => console.log(err));
@@ -41,7 +44,8 @@ exports.getCart = (req, res) => {
       res.render("shop/cart", {
         docTitle: "Your Cart",
         path: "/cart",
-        products
+        products,
+        isAuthenticated: req.isLoggedIn
       });
     })
     .catch(err => console.log(err));
@@ -69,7 +73,6 @@ exports.postOrder = (req, res) => {
     .populate("cart.items.productId")
     .execPopulate()
     .then(user => {
-      console.log("USER:", user);
       const products = user.cart.items.map(item => {
         return { quantity: item.quantity, product: { ...item.productId._doc } };
       });
@@ -94,7 +97,8 @@ exports.getOrders = (req, res) => {
       res.render("shop/orders", {
         docTitle: "Your Orders",
         path: "/orders",
-        orders
+        orders,
+        isAuthenticated: req.isLoggedIn
       });
     })
     .catch(err => console.log(err));
@@ -102,6 +106,7 @@ exports.getOrders = (req, res) => {
 exports.getCheckout = (req, res) => {
   res.render("shop/checkout", {
     path: "/checkout",
-    docTitle: "Checkout"
+    docTitle: "Checkout",
+    isAuthenticated: req.isLoggedIn
   });
 };
