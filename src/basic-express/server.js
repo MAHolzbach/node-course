@@ -7,23 +7,26 @@ const notFoundController = require("./controllers/404");
 const path = require("path");
 const User = require("./models/user");
 const mongoose = require("mongoose");
+const session = require("express-session");
+const MongoDBStore = require("connect-mongodb-session")(session);
+
+const MONGODB_URI =
+  "mongodb+srv://mike:AyyptOYxjVNPnXEQ@nodecourse-7tzcj.mongodb.net/shop";
 
 const app = express();
+const store = new MongoDBStore({
+  uri: MONGODB_URI,
+  collection: "sessions"
+});
 
 app.set("view engine", "pug");
 app.set("views", path.join(__dirname, "views"));
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, "public")));
-
-app.use((req, res, next) => {
-  User.findById("5d66ed8e7de1d216fc20ddb1")
-    .then(user => {
-      req.user = user;
-      next();
-    })
-    .catch(err => console.log(err));
-});
+app.use(
+  session({ secret: "secret", resave: false, saveUninitialized: false, store })
+);
 
 app.use("/admin", adminRoutes);
 app.use(shopRoutes);
@@ -31,9 +34,7 @@ app.use(authRoutes);
 app.use(notFoundController.handle404);
 
 mongoose
-  .connect(
-    "mongodb+srv://mike:AyyptOYxjVNPnXEQ@nodecourse-7tzcj.mongodb.net/shop?retryWrites=true&w=majority"
-  )
+  .connect(MONGODB_URI)
   .then(result => {
     User.findOne().then(user => {
       if (!user) {
