@@ -44,6 +44,7 @@ html(lang='en')
           div.navbar-end
             if !isAuthenticated
               a.navbar-item(href='/login', class=(path === '/login' ? 'has-background-grey-lighter has-text-dark' : '')) Log In
+              a.navbar-item(href='/signup', class=(path === '/signup' ? 'has-background-grey-lighter has-text-dark' : '')) Sign up
             else
               form(action='/logout', method='POST').navbar-item
                 button(type='submit').button Log out
