@@ -21,6 +21,7 @@ block content
               a(href=`/products/${product._id}`).card-footer-item.button.is-info Details
               if isAuthenticated
                 form(action="/cart" method="POST")
+                  input(type="hidden" name="_csrf" value=csrfToken)
                   button(type="submit").button.is-success Add to Cart
                   input(type="hidden" name="productId" value=`${product._id}`)
     else

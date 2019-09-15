@@ -9,6 +9,7 @@ const User = require("./models/user");
 const mongoose = require("mongoose");
 const session = require("express-session");
 const MongoDBStore = require("connect-mongodb-session")(session);
+const csrf = require("csurf");
 
 const MONGODB_URI =
   "mongodb+srv://mike:AyyptOYxjVNPnXEQ@nodecourse-7tzcj.mongodb.net/shop";
@@ -18,6 +19,7 @@ const store = new MongoDBStore({
   uri: MONGODB_URI,
   collection: "sessions"
 });
+const csrfProtection = csrf();
 
 app.set("view engine", "pug");
 app.set("views", path.join(__dirname, "views"));
@@ -27,6 +29,7 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use(
   session({ secret: "secret", resave: false, saveUninitialized: false, store })
 );
+app.use(csrfProtection);
 
 app.use((req, res, next) => {
   if (!req.session.user) {
@@ -40,6 +43,11 @@ app.use((req, res, next) => {
     .catch(err => console.log(err));
 });
 
+app.use((req, res, next) => {
+  res.locals.isAuthenticated = req.session.isLoggedIn;
+  res.locals.csrfToken = req.csrfToken();
+  next();
+});
 app.use("/admin", adminRoutes);
 app.use(shopRoutes);
 app.use(authRoutes);

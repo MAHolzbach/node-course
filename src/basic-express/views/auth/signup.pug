@@ -16,5 +16,6 @@ block content
         input.input(type='password' name='confirmPassword' id='confirmPassword' placeholder="Confirm password")
     .field
       p.control
+        input(type="hidden" name="_csrf" value=csrfToken)
         button.button.is-success(type='submit')
           | Sign up

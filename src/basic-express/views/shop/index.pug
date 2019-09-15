@@ -18,6 +18,7 @@ block content
             if isAuthenticated
               div.card-footer
                 form(action="/cart" method="POST")
+                  input(type="hidden" name="_csrf" value=csrfToken)
                   button(type="submit").button.is-success Add to Cart
                   input(type="hidden" name="productId" value=`${product._id}`)
     else
