@@ -16,3 +16,5 @@ block content
         input(type="hidden" name="_csrf" value=csrfToken)
         button.button.is-success(type='submit')
           | Login
+    if errorMessage.length > 0
+      div.notification.is-danger #{errorMessage}
