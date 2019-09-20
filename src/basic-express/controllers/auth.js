@@ -1,5 +1,8 @@
 const bcrypt = require("bcryptjs");
 const User = require("../models/user");
+const sgMail = require("@sendgrid/mail");
+
+sgMail.setApiKey(process.env.SEND_GRID_API_KEY);
 
 exports.getLogin = (req, res) => {
   res.render("auth/login", {
@@ -74,6 +77,14 @@ exports.postSignup = (req, res) => {
         })
         .then(result => {
           res.redirect("/login");
+          const msg = {
+            to: email,
+            from: "test@example.com",
+            subject: "Sending with Twilio SendGrid is Fun",
+            text: "and easy to do anywhere, even with Node.js",
+            html: "<strong>and easy to do anywhere, even with Node.js</strong>"
+          };
+          sgMail.send(msg);
         });
     })
     .catch(err => console.log("err :", err));
