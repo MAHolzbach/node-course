@@ -12,7 +12,6 @@ exports.getIndex = (req, res) => {
 };
 exports.getProducts = (req, res) => {
   Product.find().then(products => {
-    console.log(products);
     res.render("shop/product-list", {
       docTitle: "All Products",
       products,
@@ -53,7 +52,6 @@ exports.postCart = (req, res) => {
       return req.user.addToCart(product);
     })
     .then(result => {
-      console.log(result);
       res.redirect("/cart");
     });
 };

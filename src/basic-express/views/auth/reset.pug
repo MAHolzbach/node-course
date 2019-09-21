@@ -4,18 +4,14 @@ block styles
   link(rel="stylesheet", href="/css/auth.css")
 
 block content
-  form.auth-form(action="/login" method="POST")
+  form.auth-form(action="/reset" method="POST")
     .field
       p.control.has-icons-left.has-icons-right
         input.input(type='email' name='email' placeholder='Email')
     .field
-      p.control.has-icons-left
-        input.input(type='password' name='password' placeholder='Password')
-    .field
       p.control
         input(type="hidden" name="_csrf" value=csrfToken)
         button.button.is-success(type='submit')
-          | Login
+          | Reset Password
     if errorMessage.length > 0
       div.notification.is-danger #{errorMessage}
-    a(href="/reset", title="reset") Reset Password

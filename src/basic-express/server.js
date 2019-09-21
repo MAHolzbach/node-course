@@ -1,3 +1,4 @@
+require("dotenv").config();
 const express = require("express");
 const adminRoutes = require("./routes/admin");
 const shopRoutes = require("./routes/shop");
@@ -11,7 +12,6 @@ const session = require("express-session");
 const MongoDBStore = require("connect-mongodb-session")(session);
 const csrf = require("csurf");
 const flash = require("connect-flash");
-require("dotenv").config();
 
 const MONGODB_URI =
   "mongodb+srv://mike:AyyptOYxjVNPnXEQ@nodecourse-7tzcj.mongodb.net/shop";

@@ -5,7 +5,6 @@ exports.getAdminProducts = (req, res) => {
     // .select("title price -_id")
     // .populate("userId", "name")
     .then(products => {
-      console.log(products);
       res.render("admin/products", {
         products,
         docTitle: "Admin Products",
